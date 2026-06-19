@@ -3,12 +3,12 @@
   "version": "1.0.0",
   "description": "Real de Cote — bilingual marketing site served with Express (Node.js)",
   "private": true,
-  "main": "server.js",
+  "main": "index.js",
   "engines": {
     "node": ">=18"
   },
   "scripts": {
-    "start": "node server.js"
+    "start": "node index.js"
   },
   "dependencies": {
     "express": "^4.21.2"
