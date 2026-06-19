@@ -1,14 +1,13 @@
 const express = require('express');
 const path = require('path');
 
-const publicDir = path.join(__dirname, 'public');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-app.use(express.static(publicDir, { extensions: ['html'], maxAge: '1h' }));
+app.use(express.static(__dirname, { extensions: ['html'], maxAge: '1h' }));
 
 app.use(function (req, res) {
-  res.sendFile(path.join(publicDir, 'index.html'));
+  res.sendFile(path.join(__dirname, 'index.html'));
 });
 
 app.listen(PORT, function () {
