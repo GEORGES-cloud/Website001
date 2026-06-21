@@ -37,7 +37,7 @@
     "p.coup.tag":"Signature","p.coup.sub":"Our classic blend",
     "p.coup.notes":"The coupage that defines the house: a harmonious balance of varieties with subtle green notes. Smooth, rounded and versatile — perfect for everyday use and for dressing.",
     "p.manz.tag":"Single variety","p.manz.sub":"Seville's olive",
-    "p.manz.notes":"Made from the emblematic Sevillian Manzanilla Fina olive. Fresh and elegant, with a mild fruitiness and hints of green almond and apple. Balanced and highly versatile.",
+    "p.manz.notes":"Made from the emblematic Sevillian Manzanilla olive. Fresh and elegant, with a mild fruitiness and hints of green almond and apple. Balanced and highly versatile.",
     "p.bio.tag":"Organic","p.bio.var":"Organic coupage","p.bio.sub":"Unfiltered",
     "p.bio.notes":"From our certified organic groves, cold-extracted by mechanical means only. Unfiltered — it keeps the fine suspended solids that preserve its full aroma, flavour and texture.",
     "p.hoji.tag":"Single variety","p.hoji.sub":"Body & stability",
@@ -317,7 +317,7 @@
         "", L.message + ":", (fd.get("message") || "")
       ];
       var subject = L.subject + " — " + (fd.get("company") || fd.get("name") || "");
-      var href = "mailto:info@realdecoteoil.com?subject=" + encodeURIComponent(subject) +
+      var href = "mailto:info@realdecote.es?subject=" + encodeURIComponent(subject) +
                  "&body=" + encodeURIComponent(lines.join("\n"));
       var status = $("#formStatus");
       if (status) { status.textContent = STATUS[lang]; status.className = "form__status ok"; }
