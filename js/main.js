@@ -91,7 +91,8 @@
 
     "foot.tag":"Extra virgin olive oil raised at Cortijo Cote, Montellano (Seville). Heritage and distinction in every drop.",
     "foot.nav":"Navigation","foot.collection":"Collection","foot.rights":"All rights reserved.",
-    "foot.legal":"Legal notice","foot.privacy":"Privacy","foot.cookies":"Cookies"
+    "foot.legal":"Legal notice","foot.privacy":"Privacy","foot.cookies":"Cookies",
+    "wa.tip":"Chat with us"
   };
 
   var META = {
