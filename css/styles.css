@@ -601,3 +601,13 @@ h1,h2,h3,h4{font-family:var(--serif);font-weight:500;line-height:1.06;letter-spa
 .wa-float:hover .wa-float__tip{max-width:120px;opacity:1;}
 @media(prefers-reduced-motion:reduce){.wa-float{animation:none;}}
 @media(max-width:480px){.wa-float{bottom:1.1rem;right:1.1rem;padding:.65rem;}}
+
+/* =====================================================================
+   CERTIFICATIONS
+   ===================================================================== */
+.certs{background:var(--cream,#f6f1e7);padding:40px 0 44px;border-top:1px solid rgba(200,162,92,.18)}
+.certs__title{text-align:center;font-family:var(--sans);font-size:.72rem;font-weight:500;letter-spacing:.24em;text-transform:uppercase;color:#9a7b3c;margin-bottom:26px}
+.certs__row{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:34px}
+.certs__row .cert{display:inline-flex;align-items:center;justify-content:center;width:128px;height:62px}
+.certs__row .cert img{max-width:100%;max-height:100%;width:auto;height:auto;mix-blend-mode:multiply}
+@media(max-width:640px){.certs__row{gap:22px}.certs__row .cert{width:92px;height:48px}}
