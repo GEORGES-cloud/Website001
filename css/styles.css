@@ -518,9 +518,11 @@ h1,h2,h3,h4{font-family:var(--serif);font-weight:500;line-height:1.06;letter-spa
 .check input:focus-visible+span{outline:2px solid var(--gold-deep);outline-offset:2px}
 .form__submit{display:flex;align-items:center;gap:18px;flex-wrap:wrap;margin-top:4px}
 .form__note{font-size:.8rem;color:var(--ink-soft)}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
 .form__status{font-size:.92rem;padding:14px 18px;border-radius:4px;display:none}
 .form__status.show{display:block}
 .form__status.ok{display:block;background:rgba(40,90,55,.1);color:#2c6b3f;border:1px solid rgba(40,90,55,.3)}
+.form__status.error{display:block;background:rgba(150,40,40,.08);color:#9a2b2b;border:1px solid rgba(150,40,40,.3)}
 
 /* =====================================================================
    FOOTER

@@ -1,0 +1,35 @@
+Dear {{NAME}},
+
+Your enquiry has reached us safely.
+
+Thank you for your interest in Real de Cote. Your enquiry has reached our export team safely and is now in good hands.
+
+We will reply with a tailored proposal within 24-48 working hours.
+
+SUMMARY OF YOUR ENQUIRY
+----------------------------------------
+Company: {{COMPANY}}
+Destination country: {{COUNTRY}}
+References of interest: {{INTEREST}}
+Estimated volume: {{VOLUME}}
+Message: {{MESSAGE}}
+----------------------------------------
+
+Prefer a faster route? We are at your service on WhatsApp.
+
+WhatsApp: +34 680 40 85 80 (https://wa.me/34680408580)
+Email: info@realdecote.es
+
+We remain at your disposal for any further detail.
+
+Warm regards,
+The Real de Cote team
+
+----------------------------------------
+Real de Cote AOVE, S.L.
+Ctra. de Coripe, km 2,3 — Cortijo Cote
+41770 Montellano, Sevilla, Spain
+info@realdecote.es · realdecote.es · WhatsApp +34 680 40 85 80
+
+This message is an automatic acknowledgement of receipt; there is no need to reply. You are receiving it because you submitted an enquiry through realdecote.es.
+© {{YEAR}} Real de Cote AOVE, S.L. All rights reserved.

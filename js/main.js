@@ -103,8 +103,16 @@
           desc:"Real de Cote — extra virgin olive oil raised at Cortijo Cote, Montellano (Seville)." }
   };
   var STATUS = {
-    es:"Gracias. Hemos preparado su consulta — se abrirá su correo para enviarla.",
-    en:"Thank you. Your enquiry is ready — your email app will open to send it."
+    es:{
+      sending:"Enviando su consulta…",
+      ok:"Gracias. Hemos recibido su consulta y le responderemos en 24–48 h laborables.",
+      error:"No se ha podido enviar la consulta. Inténtelo de nuevo o escríbanos a info@realdecote.es."
+    },
+    en:{
+      sending:"Sending your enquiry…",
+      ok:"Thank you. We've received your enquiry and will reply within 24–48 working hours.",
+      error:"We couldn't send your enquiry. Please try again or email info@realdecote.es."
+    }
   };
 
   // cache the Spanish originals so we can switch back
@@ -295,7 +303,7 @@
   }
 
   /* ---------------------------------------------------------------
-     9. Enquiry form → compose email
+     9. Enquiry form → send from the site (POST /api/contact)
   --------------------------------------------------------------- */
   var form = $("#enquiry");
   if (form) {
@@ -303,27 +311,47 @@
       e.preventDefault();
       if (!form.checkValidity()) { form.reportValidity(); return; }
       var lang = document.documentElement.lang === "en" ? "en" : "es";
-      var fd = new FormData(form);
-      var interests = fd.getAll("interest").join(", ");
-      var L = lang === "en"
-        ? { name:"Name", company:"Company", country:"Country", email:"Email", phone:"Phone", interest:"Oils of interest", volume:"Estimated volume", message:"Message", subject:"Trade enquiry" }
-        : { name:"Nombre", company:"Empresa", country:"País", email:"Email", phone:"Teléfono", interest:"Referencias", volume:"Volumen", message:"Mensaje", subject:"Consulta comercial" };
-      var lines = [
-        L.name + ": " + (fd.get("name") || ""),
-        L.company + ": " + (fd.get("company") || ""),
-        L.country + ": " + (fd.get("country") || ""),
-        L.email + ": " + (fd.get("email") || ""),
-        L.phone + ": " + (fd.get("phone") || ""),
-        L.interest + ": " + interests,
-        L.volume + ": " + (fd.get("volume") || ""),
-        "", L.message + ":", (fd.get("message") || "")
-      ];
-      var subject = L.subject + " — " + (fd.get("company") || fd.get("name") || "");
-      var href = "mailto:info@realdecote.es?subject=" + encodeURIComponent(subject) +
-                 "&body=" + encodeURIComponent(lines.join("\n"));
       var status = $("#formStatus");
-      if (status) { status.textContent = STATUS[lang]; status.className = "form__status ok"; }
-      window.location.href = href;
+      var btn = form.querySelector('button[type="submit"]');
+      var fd = new FormData(form);
+      var payload = {
+        name: fd.get("name") || "",
+        company: fd.get("company") || "",
+        country: fd.get("country") || "",
+        email: fd.get("email") || "",
+        phone: fd.get("phone") || "",
+        interest: fd.getAll("interest"),
+        volume: fd.get("volume") || "",
+        message: fd.get("message") || "",
+        website: fd.get("website") || "", // honeypot
+        lang: lang
+      };
+
+      if (status) { status.textContent = STATUS[lang].sending; status.className = "form__status show"; }
+      if (btn) btn.disabled = true;
+
+      fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+      })
+        .then(function (r) {
+          return r.json().catch(function () { return {}; }).then(function (data) {
+            return { ok: r.ok && data && data.ok === true };
+          });
+        })
+        .then(function (res) {
+          if (res.ok) {
+            if (status) { status.textContent = STATUS[lang].ok; status.className = "form__status ok"; }
+            form.reset();
+          } else {
+            if (status) { status.textContent = STATUS[lang].error; status.className = "form__status error"; }
+          }
+        })
+        .catch(function () {
+          if (status) { status.textContent = STATUS[lang].error; status.className = "form__status error"; }
+        })
+        .then(function () { if (btn) btn.disabled = false; });
     });
   }
 

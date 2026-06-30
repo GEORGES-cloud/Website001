@@ -566,6 +566,11 @@
       </div>
 
       <form class="form" id="enquiry" data-reveal="right" novalidate>
+        <!-- honeypot anti-spam: invisible para personas, los bots lo rellenan -->
+        <div class="hp" aria-hidden="true">
+          <label for="f-website">No rellenar</label>
+          <input id="f-website" name="website" type="text" tabindex="-1" autocomplete="off">
+        </div>
         <div class="row">
           <div class="field">
             <label for="f-name"><span data-i18n="con.f.name">Nombre</span> <span class="req">*</span></label>
