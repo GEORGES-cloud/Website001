@@ -68,42 +68,6 @@ function renderTpl(tpl, vars) {
 app.use(express.json({ limit: '32kb' }));
 
 /* ---------------------------------------------------------------------
-   TEMP DIAGNOSTIC — REMOVE AFTER SMTP IS CONFIRMED WORKING.
-   Token-gated. Tests SMTP connectivity/auth on 465 and 587 without
-   sending mail or exposing the password. Returns the exact error.
---------------------------------------------------------------------- */
-const DIAG_TOKEN = 'diag-c1e61d3233360dba5cabce06d737c720';
-app.get('/api/_smtpcheck', async function (req, res) {
-  if (req.query.key !== DIAG_TOKEN) { return res.status(404).end(); }
-  const tests = [
-    { label: 'p465_ssl', port: 465, secure: true },
-    { label: 'p587_starttls', port: 587, secure: false }
-  ];
-  const out = { config: { host: SMTP_HOST, user: SMTP_USER, passSet: !!SMTP_PASS, passLen: SMTP_PASS.length } };
-  for (let i = 0; i < tests.length; i++) {
-    const t = tests[i];
-    const tx = nodemailer.createTransport({
-      host: SMTP_HOST, port: t.port, secure: t.secure,
-      auth: { user: SMTP_USER, pass: SMTP_PASS },
-      connectionTimeout: 9000, greetingTimeout: 9000, socketTimeout: 9000,
-      tls: { rejectUnauthorized: false }
-    });
-    try {
-      await tx.verify();
-      out[t.label] = { ok: true };
-    } catch (e) {
-      out[t.label] = {
-        ok: false,
-        code: e && e.code, command: e && e.command,
-        responseCode: e && e.responseCode,
-        message: (e && e.message ? String(e.message) : '').slice(0, 300)
-      };
-    }
-  }
-  res.json(out);
-});
-
-/* ---------------------------------------------------------------------
    Contact endpoint — the website sends the email itself, no mailto.
 --------------------------------------------------------------------- */
 app.post('/api/contact', async function (req, res) {
